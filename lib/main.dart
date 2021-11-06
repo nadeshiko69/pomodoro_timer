@@ -1,15 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:pomodoro_timer/timer.dart';
+import 'package:pomodoro_timer/UI/timer.dart';
 
 void main() {
   runApp(MainMenu());
 }
 
 class MainMenu extends StatefulWidget {
-  //MainMenu({Key key, this.title}) : super(key: key);
-
-  //final String title;
+  MainMenu();
 
   @override
   _MainMenu createState() => _MainMenu();
@@ -39,7 +37,7 @@ class _Home extends State<Home>{
   Widget build(BuildContext context){
     return Scaffold(
       appBar: AppBar(
-        title: Text('Pomodoro Timer'),
+        title: Text('ポモドーロタイマー'),
       ),
       body: Center(
         child: Column(
@@ -120,7 +118,9 @@ class _Home extends State<Home>{
                       MaterialPageRoute(
                           builder: (context) => Timer(
                               int.parse(dropdownWorkValue),
-                              int.parse(dropdownBrakeValue)
+                              int.parse(dropdownWorkValue),
+                              int.parse(dropdownBrakeValue),
+                              0
                           )
                       ),
                     );
