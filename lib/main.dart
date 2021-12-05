@@ -17,6 +17,7 @@ class _MainMenu extends State<MainMenu> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+        debugShowCheckedModeBanner: false,
       home: Home()
     );
   }
@@ -35,100 +36,104 @@ class _Home extends State<Home>{
   String dropdownBrakeValue = '5';
   @override
   Widget build(BuildContext context){
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('ポモドーロタイマー'),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-            Expanded(
-              child: Center(
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: <Widget>[
-                    Text('作業時間　'),
-                    // じかん設定ボタンを配置
-                    DropdownButton<String>(
-                      value: dropdownWorkValue,
-                      iconSize: 24,
-                      elevation: 16,
-                      style: const TextStyle(color: Colors.deepPurple),
-                      underline: Container(
-                        height: 2,
-                        color: Colors.deepPurpleAccent,
+    return Container(
+      height:double.infinity,
+      width: double.infinity,
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text('ポモドーロタイマー'),
+        ),
+        body: Center(
+          child: Column(
+            //mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              Expanded(
+                child: Center(
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: <Widget>[
+                      Text('作業時間　'),
+                      // じかん設定ボタンを配置
+                      DropdownButton<String>(
+                        value: dropdownWorkValue,
+                        iconSize: 24,
+                        elevation: 16,
+                        style: const TextStyle(color: Colors.deepPurple),
+                        underline: Container(
+                          height: 2,
+                          color: Colors.deepPurpleAccent,
+                        ),
+                        onChanged: (String? newValue) {
+                          setState(() {
+                            dropdownWorkValue = newValue!;
+                          });
+                        },
+                        items: workTime.map<DropdownMenuItem<String>>((String value) {
+                          return DropdownMenuItem<String>(
+                            value: value,
+                            child: Text(value),
+                          );
+                        }).toList(),
                       ),
-                      onChanged: (String? newValue) {
-                        setState(() {
-                          dropdownWorkValue = newValue!;
-                        });
-                      },
-                      items: workTime.map<DropdownMenuItem<String>>((String value) {
-                        return DropdownMenuItem<String>(
-                          value: value,
-                          child: Text(value),
-                        );
-                      }).toList(),
-                    ),
-                    Text('分'),
-                  ],
+                      Text('分'),
+                    ],
+                  ),
                 ),
               ),
-            ),
-            Expanded(
-              child: Center(
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: <Widget>[
-                    Text('休憩時間　'),
-                    DropdownButton<String>(
-                      value: dropdownBrakeValue,
-                      iconSize: 24,
-                      elevation: 16,
-                      style: const TextStyle(color: Colors.deepPurple),
-                      underline: Container(
-                        height: 2,
-                        color: Colors.deepPurpleAccent,
+              Expanded(
+                child: Center(
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: <Widget>[
+                      Text('休憩時間　'),
+                      DropdownButton<String>(
+                        value: dropdownBrakeValue,
+                        iconSize: 24,
+                        elevation: 16,
+                        style: const TextStyle(color: Colors.deepPurple),
+                        underline: Container(
+                          height: 2,
+                          color: Colors.deepPurpleAccent,
+                        ),
+                        onChanged: (String? newValue) {
+                          setState(() {
+                            dropdownBrakeValue = newValue!;
+                          });
+                        },
+                        items: brakeTime.map<DropdownMenuItem<String>>((String value) {
+                          return DropdownMenuItem<String>(
+                            value: value,
+                            child: Text(value),
+                          );
+                        }).toList(),
                       ),
-                      onChanged: (String? newValue) {
-                        setState(() {
-                          dropdownBrakeValue = newValue!;
-                        });
-                      },
-                      items: brakeTime.map<DropdownMenuItem<String>>((String value) {
-                        return DropdownMenuItem<String>(
-                          value: value,
-                          child: Text(value),
-                        );
-                      }).toList(),
-                    ),
-                    Text('分'),
-                  ],
+                      Text('分'),
+                    ],
+                  ),
                 ),
               ),
-            ),
-            Expanded(
-              child: Center(
-                child : RaisedButton(
-                  child: Text('スタート'),
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => Timer(
-                              int.parse(dropdownWorkValue),
-                              int.parse(dropdownWorkValue),
-                              int.parse(dropdownBrakeValue),
-                              0
-                          )
-                      ),
-                    );
-                  },
+              Expanded(
+                child: Center(
+                  child : RaisedButton(
+                    child: Text('スタート'),
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => Timer(
+                                int.parse(dropdownWorkValue),
+                                int.parse(dropdownWorkValue),
+                                int.parse(dropdownBrakeValue),
+                                0
+                            )
+                        ),
+                      );
+                    },
+                  ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
